@@ -43,11 +43,14 @@ jobs:
         go-version: ["1.18.x"]
         target:
           - os: linux
+            dir: linux-amd64
           - os: windows
+            dir: windows-amd64
             ext: .exe
           - os: android
             args: -app-id calc.${GITHUB_SHA}
           - os: darwin
+            dir: darwin-amd64
             args: -app-id calc.${GITHUB_SHA}
             host: macos-latest
 
@@ -96,5 +99,5 @@ jobs:
       - name: Upload Assets
         uses: AButler/upload-release-assets@v2.0
         with:
-          files: '*.tar.gz'
+          files: fyne-cross/dist/${{ matrix.target.dir || matrix.target.os }}/*
           repo-token: ${{ secrets.GITHUB_TOKEN }}
