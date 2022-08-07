@@ -1,2 +1,5 @@
 run:
-	@go run *.go
+	@go run cmd/*.go
+
+debug:
+	@go run cmd/*.go --debug
