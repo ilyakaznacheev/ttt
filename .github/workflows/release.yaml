@@ -96,5 +96,5 @@ jobs:
       - name: Upload Assets
         uses: AButler/upload-release-assets@v2.0
         with:
-          files: 'fyne-cross/dist/*;fyne-cross/bin/*'
+          files: '*.tar.gz'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
