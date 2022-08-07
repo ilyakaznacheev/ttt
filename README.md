@@ -4,7 +4,7 @@ A simplistic GUI game in Golang.
 
 ## Usage
 
-Download binary for your OS and architecture from the [releases page](/releases) and run it.
+Download binary for your OS and architecture from the [releases page](https://github.com/ilyakaznacheev/ttt/releases) and run it.
 
 ## Development
 
