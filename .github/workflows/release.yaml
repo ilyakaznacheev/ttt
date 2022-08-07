@@ -60,6 +60,9 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Checkout fyne-cross
+        uses: actions/checkout@v2
         with:
           repository: fyne-io/fyne-cross
           path: fyne-cross
