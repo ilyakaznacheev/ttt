@@ -59,38 +59,24 @@ jobs:
           go-version: ${{ matrix.go-version }}
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Checkout fyne-cross
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: fyne-io/fyne-cross
           path: fyne-cross
-
-      # - name: Checkout fyne-io/calculator
-      #   uses: actions/checkout@v2
-      #   with:
-      #     repository: fyne-io/calculator
-      #     path: calculator
-
-      # - name: Cache build artifacts
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       ~/go/pkg/mod
-      #       ~/.cache/go-build
-      #       ~/.cache/fyne-cross
-      #     key: ${{ runner.os }}-build-cache-${{ hashFiles('**/go.sum') }}
 
       - name: Install Fyne-cross
         working-directory: fyne-cross
         run: go install
 
-        # attempt to use "go install" but fallback to "go get"
-      # - name: Install Fyne
-      #   run: |
-      #     go install fyne.io/fyne/v2/cmd/fyne@latest ||
-      #     go get fyne.io/fyne/v2/cmd/fyne@latest
+      - name: Install Fyne
+        if: ${{ runner.os == 'macos' }}
+        run: |
+          go install fyne.io/fyne/v2/cmd/fyne@latest ||
+          go get fyne.io/fyne/v2/cmd/fyne@latest
+
       - name: Install Podman
         if: ${{ runner.os == 'macos' }}
         run: |
@@ -106,3 +92,9 @@ jobs:
             -debug -no-cache \
             -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
             ./cmd
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ttt-${{ matrix.target.os }}${{ matrix.target.ext }}
+          path: ttt-${{ matrix.target.os }}${{ matrix.target.ext }}
