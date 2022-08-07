@@ -5,37 +5,11 @@ on:
     types: [created]
 
 jobs:
-  # release-matrix:
-  #   name: Release Go Binary
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       goos: [linux, windows, darwin]
-  #       goarch: ["386", amd64, arm64]
-  #       exclude:
-  #         - goarch: "386"
-  #           goos: darwin
-  #         - goarch: arm64
-  #           goos: windows
-  #   env:
-  #     CGO_ENABLED: 1
-  #   steps:
-  #   - uses: actions/checkout@v3
-  #   - uses: wangyoucao577/go-release-action@v1.28
-  #     with:
-  #       github_token: ${{ secrets.GITHUB_TOKEN }}
-  #       goos: ${{ matrix.goos }}
-  #       goarch: ${{ matrix.goarch }}
-  #       project_path: "./cmd"
-  #       binary_name: "ttt"
-  #       extra_files: LICENSE README.md
-
   build:
     name: "Build TTT (${{ matrix.target.os }}, ${{ matrix.go-version }})"
     runs-on: ${{ matrix.target.host || 'ubuntu-latest' }}
     env:
       GO111MODULE: on
-      CGO_ENABLED: 1
     strategy:
       fail-fast: false
       matrix:
@@ -53,6 +27,7 @@ jobs:
             dir: darwin-amd64
             args: -app-id calc.${GITHUB_SHA}
             host: macos-latest
+          - os: web
 
     steps:
       - name: Setup Go environment
