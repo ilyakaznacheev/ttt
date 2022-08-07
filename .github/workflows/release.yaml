@@ -91,10 +91,9 @@ jobs:
             ${{ matrix.target.args }} \
             -debug -no-cache \
             -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
-            -output bin
             ./cmd
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          path: fyne-cross/bin/ttt-${{ matrix.target.os }}${{ matrix.target.ext }}
+          path: fyne-cross/dist/{{ matrix.target.os }}-{{ matrix.target.arch }/
