@@ -79,14 +79,14 @@ jobs:
             ${{ matrix.target.os }} \
             ${{ matrix.target.args }} \
             -debug -no-cache \
-            -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
+            -name ${{ matrix.target.os }}${{ matrix.target.ext }} \
             ./cmd
 
       - name: Archive web
         if: ${{ matrix.target.os == 'web' }}
         run: |
           mkdir fyne-cross/dist/web-build
-          tar -czvf fyne-cross/dist/web-build/web.tar.gz fyne-cross/dist/web
+          tar -czvf fyne-cross/dist/web-build/web.tar.gz -C fyne-cross/dist/web .
 
       - name: Upload Assets
         uses: AButler/upload-release-assets@v2.0
