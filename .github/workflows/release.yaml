@@ -83,7 +83,7 @@ jobs:
             ./cmd
 
       - name: Archive web
-        if: ${{ runner.os == 'web' }}
+        if: ${{ matrix.target.os == 'web' }}
         run: |
           mkdir fyne-cross/dist/web-build
           tar -czvf fyne-cross/dist/web-build/web.tar.gz fyne-cross/dist/web
