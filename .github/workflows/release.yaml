@@ -24,10 +24,10 @@ jobs:
             ext: .exe
           - os: android
             args: -app-id calc.${GITHUB_SHA}
-          - os: darwin
-            dir: darwin-amd64
-            args: -app-id calc.${GITHUB_SHA}
-            host: macos-latest
+          # - os: darwin
+          #   dir: darwin-amd64
+          #   args: -app-id calc.${GITHUB_SHA}
+          #   host: macos-latest
           - os: web
             dir: web-build
 
