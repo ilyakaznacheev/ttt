@@ -96,10 +96,10 @@ jobs:
           podman machine start
             
       - name: Build
-        working-directory: cmd
         run: |
           fyne-cross \
             ${{ matrix.target.os }} \
             ${{ matrix.target.args }} \
             -debug -no-cache \
-            -name ttt-${{ matrix.target.ext }}
+            -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
+            ./cmd
