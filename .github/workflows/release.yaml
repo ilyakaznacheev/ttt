@@ -93,9 +93,8 @@ jobs:
             -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
             ./cmd
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload Assets
+        uses: AButler/upload-release-assets@v2.0
         with:
-          path: |
-            fyne-cross/dist/**/*
-            fyne-cross/bin/**/*
+          files: 'fyne-cross/dist/*;fyne-cross/bin/*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
