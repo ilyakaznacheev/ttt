@@ -17,6 +17,8 @@ jobs:
             goos: darwin
           - goarch: arm64
             goos: windows
+    env:
+      CGO_ENABLED: 1
     steps:
     - uses: actions/checkout@v3
     - uses: wangyoucao577/go-release-action@v1.28
