@@ -18,19 +18,18 @@ jobs:
           - 1.18.x
         target:
           - os: linux
-            dir: dist/linux-amd64
+            dir: linux-amd64
           - os: windows
-            dir: dist/windows-amd64
+            dir: windows-amd64
             ext: .exe
           - os: android
-            dir: dist/android
             args: -app-id calc.${GITHUB_SHA}
           - os: darwin
-            dir: dist/darwin-amd64
+            dir: darwin-amd64
             args: -app-id calc.${GITHUB_SHA}
             host: macos-latest
           - os: web
-            dir: dist
+            dir: web-build
 
     steps:
       - name: Setup Go environment
@@ -82,6 +81,12 @@ jobs:
             -debug -no-cache \
             -name ttt-${{ matrix.target.os }}${{ matrix.target.ext }} \
             ./cmd
+
+      - name: Archive web
+        if: ${{ runner.os == 'web' }}
+        run: |
+          mkdir fyne-cross/dist/web-build
+          tar -czvf fyne-cross/dist/web-build/web.tar.gz fyne-cross/dist/web
 
       - name: Upload Assets
         uses: AButler/upload-release-assets@v2.0
